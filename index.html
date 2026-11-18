@@ -220,6 +220,11 @@ html, body {
 .fc-day .hi2 { font-size: 28px; font-weight: 700; color: #1f2a44; }
 .fc-day .hi2 .lo { font-size: 19px; font-weight: 400; color: #8a94a6; }
 .wx-aqi .asrc { font-size: 15px; margin-top: 10px; opacity: .7; }
+
+
+/* HOME v2 (approved 2026-11-18): prominent red bold temperature + condition */
+.wx2-top .wx-temp { color: #c0392b; font-weight: 800; }
+.wx2-top .wx-cond { color: #c0392b; font-weight: 700; font-size: 30px; }
 </style>
 </head>
 <body>
@@ -227,7 +232,7 @@ html, body {
 
   <section class="slide" id="s0">
     <div class="topbar"><span class="dateline">Wednesday, 18 November 2026</span><span class="placeline">Fatrade, Goa</span></div>
-    <div id="home-body"><div class="card"><div class="wx-main"><div><div class="wx-temp">34&deg;</div><div class="wx-cond">Partly cloudy</div><div style="margin-top:8px"><span class="aqi-chip" style="background:#d9711e">AQI 134 &middot; Unhealthy for sensitive groups</span></div></div><div class="wx-details">Feels like 35&deg;C<br>Humidity 33%<br>Wind 3 km/h<br>Sunrise 06:37 &middot; Sunset 18:01<br>UV max 7</div></div></div><div class="forecast"><div class="fc-day" data-day="2026-11-19"><div class="d">Thu</div><div class="icon">☁️</div><div class="hi">35&deg;</div><div class="lo">20&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-20"><div class="d">Fri</div><div class="icon">☀️</div><div class="hi">34&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-21"><div class="d">Sat</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-22"><div class="d">Sun</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-23"><div class="d">Mon</div><div class="icon">🌫️</div><div class="hi">34&deg;</div><div class="lo">19&deg;</div><div class="pc">6% rain</div></div></div></div>
+    <div id="home-body"><div class="card" style="margin-top:0"><span class="accent-strip" style="background:#e4ecf7;color:#1f2a44">Air &amp; weather</span><div class="wx2-row"><div class="wx-aqi" style="background:#d9711e"><div class="al">Air quality &middot; US AQI</div><div class="an">134</div><div class="ac">Unhealthy for sensitive groups</div><div class="apm">PM2.5 36 &middot; PM10 40 &micro;g/m&sup3;</div><div class="aad">Sensitive groups may experience health effects.</div><div class="asrc">Estimates &middot; Open-Meteo</div></div><div class="wx2-right"><div class="wx2-top"><div class="wx-temp">34&deg;</div><div class="wx-cond">Partly cloudy</div></div><div class="wx-stats"><div class="wx-stat"><div class="l">Feels like</div><div class="v">35&deg;</div></div><div class="wx-stat"><div class="l">Humidity</div><div class="v">33%</div></div><div class="wx-stat"><div class="l">Wind</div><div class="v">3 km/h</div></div><div class="wx-stat"><div class="l">UV today</div><div class="v">7</div></div><div class="wx-stat"><div class="l">Sunrise</div><div class="v">06:37</div></div><div class="wx-stat"><div class="l">Sunset</div><div class="v">18:01</div></div></div></div></div></div><div class="forecast"><div class="fc-day" data-day="2026-11-18"><div class="d">Today</div><div class="fc-cond">Overcast</div><div class="hi2">34&deg; <span class="lo">/ 19&deg;</span></div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-19"><div class="d">Thu</div><div class="fc-cond">Overcast</div><div class="hi2">35&deg; <span class="lo">/ 20&deg;</span></div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-20"><div class="d">Fri</div><div class="fc-cond">Clear sky</div><div class="hi2">34&deg; <span class="lo">/ 18&deg;</span></div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-21"><div class="d">Sat</div><div class="fc-cond">Clear sky</div><div class="hi2">32&deg; <span class="lo">/ 18&deg;</span></div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-22"><div class="d">Sun</div><div class="fc-cond">Clear sky</div><div class="hi2">32&deg; <span class="lo">/ 18&deg;</span></div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-23"><div class="d">Mon</div><div class="fc-cond">Fog</div><div class="hi2">34&deg; <span class="lo">/ 19&deg;</span></div><div class="pc">Rain 6%</div></div></div></div>
   </section>
 
   <section class="slide" id="s1">
@@ -314,7 +319,7 @@ html, body {
     </div>
   </section>
 
-  <div id="footer" data-rendered="2026-11-18T16:42:11.031889+05:30">Updated Wed 18 Nov, 4:42 pm</div>
+  <div id="footer" data-rendered="2026-11-18T16:46:05.713576+05:30">Updated Wed 18 Nov, 4:46 pm</div>
   <div id="dots"></div>
   <div id="paused">Paused, tap to resume</div>
 </div>
