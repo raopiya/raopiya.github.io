@@ -185,7 +185,10 @@ html, body {
 #footer {
   position: absolute; bottom: 14px; left: 30px;
   font-size: 16px; color: #8a94a6;
+  max-width: 46%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+#footer.stale-soft { color: #b07917; }
+#footer.stale-hard { color: #b3402e; font-weight: 600; }
 #dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
 #dots .dot { width: 11px; height: 11px; border-radius: 50%; background: #cfc8b8; }
 #dots .dot.on { background: #1f2a44; }
@@ -202,13 +205,13 @@ html, body {
 
   <section class="slide" id="s0">
     <div class="topbar"><span class="dateline">Wednesday, 18 November 2026</span><span class="placeline">Fatrade, Goa</span></div>
-    <div class="card"><div class="wx-main"><div><div class="wx-temp">34&deg;</div><div class="wx-cond">Partly cloudy</div><div style="margin-top:8px"><span class="aqi-chip" style="background:#d9711e">AQI 134 &middot; Unhealthy for sensitive groups</span></div></div><div class="wx-details">Feels like 35&deg;C<br>Humidity 33%<br>Wind 3 km/h<br>Sunrise 06:37 &middot; Sunset 18:01<br>UV max 7</div></div></div><div class="forecast"><div class="fc-day"><div class="d">Thu</div><div class="icon">☁️</div><div class="hi">35&deg;</div><div class="lo">20&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day"><div class="d">Fri</div><div class="icon">☀️</div><div class="hi">34&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day"><div class="d">Sat</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day"><div class="d">Sun</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day"><div class="d">Mon</div><div class="icon">🌫️</div><div class="hi">34&deg;</div><div class="lo">19&deg;</div><div class="pc">6% rain</div></div></div>
+    <div id="home-body"><div class="card"><div class="wx-main"><div><div class="wx-temp">34&deg;</div><div class="wx-cond">Partly cloudy</div><div style="margin-top:8px"><span class="aqi-chip" style="background:#d9711e">AQI 134 &middot; Unhealthy for sensitive groups</span></div></div><div class="wx-details">Feels like 35&deg;C<br>Humidity 33%<br>Wind 3 km/h<br>Sunrise 06:37 &middot; Sunset 18:01<br>UV max 7</div></div></div><div class="forecast"><div class="fc-day" data-day="2026-11-19"><div class="d">Thu</div><div class="icon">☁️</div><div class="hi">35&deg;</div><div class="lo">20&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-20"><div class="d">Fri</div><div class="icon">☀️</div><div class="hi">34&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-21"><div class="d">Sat</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-22"><div class="d">Sun</div><div class="icon">☀️</div><div class="hi">32&deg;</div><div class="lo">18&deg;</div><div class="pc">&nbsp;</div></div><div class="fc-day" data-day="2026-11-23"><div class="d">Mon</div><div class="icon">🌫️</div><div class="hi">34&deg;</div><div class="lo">19&deg;</div><div class="pc">6% rain</div></div></div></div>
   </section>
 
   <section class="slide" id="s1">
     <div class="card fill" style="margin-top:0">
       <span class="accent-strip" style="background:#e4eefb;color:#1f4e79">Next 7 days</span>
-      <div class="cal-list"><div class="cal-day today"><span class="dl">Today</span> <div class="cal-item"><span class="ti">RCM 1.0</span> <span class="t">&middot; 5:00 pm-6:30 pm</span></div></div><div class="cal-day"><span class="dl">Thu 19 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day"><span class="dl">Fri 20 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day"><span class="dl">Sat 21 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day"><span class="dl">Sun 22 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day"><span class="dl">Mon 23 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day"><span class="dl">Tue 24 Nov</span> <div class="cal-item holiday"><span class="ti">Guru Nanak Jayanti</span> <span class="t">&middot; All day</span></div><div class="cal-item holiday"><span class="ti">Guru Tegh Bahadur&#x27;s Martyrdom Day</span> <span class="t">&middot; All day</span></div></div></div>
+      <div class="cal-list"><div class="cal-day today" data-day="2026-11-18"><span class="dl">Today</span> <div class="cal-item"><span class="ti">RCM 1.0</span> <span class="t">&middot; 5:00 pm-6:30 pm</span></div></div><div class="cal-day" data-day="2026-11-19"><span class="dl">Thu 19 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day" data-day="2026-11-20"><span class="dl">Fri 20 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day" data-day="2026-11-21"><span class="dl">Sat 21 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day" data-day="2026-11-22"><span class="dl">Sun 22 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day" data-day="2026-11-23"><span class="dl">Mon 23 Nov</span> <div class="cal-item cal-empty">No events</div></div><div class="cal-day" data-day="2026-11-24"><span class="dl">Tue 24 Nov</span> <div class="cal-item holiday"><span class="ti">Guru Nanak Jayanti</span> <span class="t">&middot; All day</span></div><div class="cal-item holiday"><span class="ti">Guru Tegh Bahadur&#x27;s Martyrdom Day</span> <span class="t">&middot; All day</span></div></div></div>
     </div>
   </section>
 
@@ -242,7 +245,7 @@ html, body {
   <section class="slide" id="s4">
     <div class="card fill" style="margin-top:0">
       <span class="accent-strip" style="background:#fbe3e6;color:#b03a4b">Top 5 headlines</span>
-      <div class="news-item"><div class="news-title"><span class="news-num">1</span>LeT’s Lateef Bhat killed in Kulgam encounter</div><div class="news-src">The Hindu</div></div><div class="news-item"><div class="news-title"><span class="news-num">2</span>Three things to watch as Trump, Xi and Putin meet in China</div><div class="news-src">CNBC</div></div><div class="news-item"><div class="news-title"><span class="news-num">3</span>Modi Tries to End Photo-Op With Trump in Awkward Quad Briefing</div><div class="news-src">Bloomberg.com</div></div><div class="news-item"><div class="news-title"><span class="news-num">4</span>Delhi court seeks report from Police on complaint alleging Sonia Gandhi&#x27;s name was included in voters roll before she became Indian citizen</div><div class="news-src">Bar and Bench</div></div><div class="news-item"><div class="news-title"><span class="news-num">5</span>Pakistani man sentenced to 27 years for Iran-backed plot to kill Trump</div><div class="news-src">BBC</div></div>
+      <div id="news-body"><div class="news-item"><div class="news-title"><span class="news-num">1</span>LeT’s Lateef Bhat killed in Kulgam encounter</div><div class="news-src">The Hindu</div></div><div class="news-item"><div class="news-title"><span class="news-num">2</span>Three things to watch as Trump, Xi and Putin meet in China</div><div class="news-src">CNBC</div></div><div class="news-item"><div class="news-title"><span class="news-num">3</span>Modi Tries to End Photo-Op With Trump in Awkward Quad Briefing</div><div class="news-src">Bloomberg.com</div></div><div class="news-item"><div class="news-title"><span class="news-num">4</span>Delhi court seeks report from Police on complaint alleging Sonia Gandhi&#x27;s name was included in voters roll before she became Indian citizen</div><div class="news-src">Bar and Bench</div></div><div class="news-item"><div class="news-title"><span class="news-num">5</span>Pakistani man sentenced to 27 years for Iran-backed plot to kill Trump</div><div class="news-src">BBC</div></div></div>
     </div>
   </section>
 
@@ -284,7 +287,7 @@ html, body {
     </div>
   </section>
 
-  <div id="footer">Updated Wed 18 Nov, 4:03 pm</div>
+  <div id="footer" data-rendered="2026-11-18T16:24:33.714431+05:30">Updated Wed 18 Nov, 4:24 pm</div>
   <div id="dots"></div>
   <div id="paused">Paused, tap to resume</div>
 </div>
@@ -693,6 +696,79 @@ document.addEventListener('keydown', function (e) {
   var m = (location.hash || '').match(/slide=(\d+)/);
   if (m) { preview = parseInt(m[1], 10); show(preview); }
   else { show(0); startTimer(); }
+  // Staleness guard: if a scheduled refresh fails, the published page must not
+  // present old data as current. Hides past-day rows, relabels a stale "Today",
+  // and marks the footer when the data ages. All local, pinned to IST (UTC+5:30).
+  function nowIST() { var n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 330) * 60000); }
+  function isoDay(d) {
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var WDAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function staleGuard() {
+    var f = document.getElementById('footer');
+    if (!f || !f.getAttribute('data-rendered')) return;
+    var rendered = new Date(f.getAttribute('data-rendered'));
+    var ageH = (Date.now() - rendered.getTime()) / 36e5;
+    var n = nowIST();
+    var today = isoDay(n);
+    // Next expected refresh after the render: 7:00 or 17:00 IST daily.
+    var rIST = new Date(rendered.getTime() + (rendered.getTimezoneOffset() + 330) * 60000);
+    var cand = new Date(rIST); cand.setHours(7, 0, 0, 0);
+    if (cand <= rIST) cand.setHours(17, 0, 0, 0);
+    if (cand <= rIST) cand.setDate(cand.getDate() + 1), cand.setHours(7, 0, 0, 0);
+    var nextRefreshUtcMs = cand.getTime() - (rIST.getTimezoneOffset() + 330) * 60000;
+    var overdueH = (Date.now() - nextRefreshUtcMs) / 36e5;
+    var days = document.querySelectorAll('[data-day]');
+    for (var i = 0; i < days.length; i++) {
+      var el = days[i], dd = el.getAttribute('data-day');
+      if (dd < today) { el.style.display = 'none'; continue; }
+      var lab = el.querySelector('.dl');
+      if (lab && lab.textContent === 'Today' && dd !== today) {
+        var dt = new Date(dd + 'T00:00:00+05:30');
+        lab.textContent = WDAYS[dt.getDay()] + ' ' + ('0' + dt.getDate()).slice(-2) + ' ' + MONTHS[dt.getMonth()];
+      }
+    }
+    var calList = document.querySelector('.cal-list');
+    if (calList && !document.getElementById('cal-stale-note')) {
+      var anyVisible = false;
+      var cd = calList.querySelectorAll('.cal-day');
+      for (var j = 0; j < cd.length; j++) if (cd[j].style.display !== 'none') { anyVisible = true; break; }
+      if (cd.length && !anyVisible) {
+        var note = document.createElement('div');
+        note.className = 'cal-item cal-empty';
+        note.id = 'cal-stale-note';
+        note.textContent = 'No upcoming events listed';
+        calList.appendChild(note);
+      }
+    }
+    // Source expiry: weather and news are point-in-time - pull them after 24h.
+    if (ageH > 24) {
+      var hb = document.getElementById('home-body');
+      if (hb && !hb.getAttribute('data-expired')) {
+        hb.setAttribute('data-expired', '1');
+        hb.innerHTML = '<div class="card"><div class="wx-cond">Weather unavailable - data expired. It returns at the next successful refresh.</div></div>';
+      }
+      var nb = document.getElementById('news-body');
+      if (nb && !nb.getAttribute('data-expired')) {
+        nb.setAttribute('data-expired', '1');
+        nb.innerHTML = '<div class="card cal-empty">Headlines unavailable - data expired. They return at the next successful refresh.</div>';
+      }
+    }
+    if (overdueH > 12) {
+      if (f.getAttribute('data-stale') !== 'hard') {
+        f.setAttribute('data-stale', 'hard');
+        f.classList.add('stale-hard');
+        f.textContent += ' · may be out of date';
+      }
+    } else if (overdueH > 1 && !f.getAttribute('data-stale')) {
+      f.setAttribute('data-stale', 'soft');
+      f.classList.add('stale-soft');
+      f.textContent += ' · refresh pending';
+    }
+  }
+  staleGuard();
+  setInterval(staleGuard, 60000);
   setTimeout(function () { location.reload(true); }, 30 * 60 * 1000);
 })();
 </script>
