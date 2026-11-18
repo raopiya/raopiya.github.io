@@ -120,10 +120,14 @@ html, body {
 .kw-wrap { display: flex; gap: 24px; margin-top: 18px; flex: 1; }
 .kw-main {
   flex: 1.4; background: #fff; border-radius: 20px; box-shadow: 0 2px 10px rgba(31,42,68,.08);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; min-width: 0;
 }
-.kw-word { font-size: 84px; font-weight: 700; color: #155e46; }
-.kw-meaning { font-size: 32px; color: #4a5568; margin-top: 14px; }
+.kw-word { font-size: 116px; font-weight: 800; color: #155e46; line-height: 1.05; white-space: nowrap; }
+.kw-meaning { font-size: 40px; font-weight: 600; color: #1f2a44; margin-top: 12px; }
+.kw-example { margin-top: 36px; background: #f6efdd; border-radius: 16px; padding: 20px 30px 24px; max-width: 620px; }
+.kw-ex-label { font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: #a08c5a; text-align: center; margin-bottom: 8px; }
+.kw-ex-phrase { font-size: 32px; font-style: italic; color: #1f2a44; text-align: center; }
+.kw-ex-meaning { font-size: 23px; color: #6b7689; text-align: center; margin-top: 6px; }
 .kw-label { font-size: 18px; color: #8a94a6; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
 .kw-revise {
   flex: 1; background: #fff; border-radius: 20px; box-shadow: 0 2px 10px rgba(31,42,68,.08);
@@ -198,6 +202,24 @@ html, body {
   background: rgba(31,42,68,.85); color: #fff;
   font-size: 16px; border-radius: 10px; padding: 5px 12px;
 }
+
+/* HOME v2 (reference-style AQI panel + stat grid + text forecast) */
+.wx2-row { display: flex; gap: 26px; margin-top: 14px; }
+.wx-aqi { width: 330px; flex: none; border-radius: 16px; padding: 18px 24px 20px; color: #fff; display: flex; flex-direction: column; }
+.wx-aqi .al { font-size: 15px; letter-spacing: 2px; text-transform: uppercase; opacity: .85; }
+.wx-aqi .an { font-size: 92px; font-weight: 800; line-height: 1.05; }
+.wx-aqi .ac { font-size: 28px; font-weight: 700; margin-top: 2px; }
+.wx-aqi .apm { font-size: 17px; margin-top: 10px; opacity: .92; }
+.wx-aqi .aad { font-size: 16px; margin-top: 6px; line-height: 1.35; opacity: .92; }
+.wx2-right { flex: 1; min-width: 0; }
+.wx2-top { display: flex; align-items: baseline; gap: 20px; }
+.wx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 20px; margin-top: 22px; }
+.wx-stat .l { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a94a6; }
+.wx-stat .v { font-size: 27px; font-weight: 700; color: #1f2a44; margin-top: 3px; }
+.fc-day .fc-cond { font-size: 16px; color: #4a5568; margin-top: 8px; min-height: 38px; line-height: 1.2; }
+.fc-day .hi2 { font-size: 28px; font-weight: 700; color: #1f2a44; }
+.fc-day .hi2 .lo { font-size: 19px; font-weight: 400; color: #8a94a6; }
+.wx-aqi .asrc { font-size: 15px; margin-top: 10px; opacity: .7; }
 </style>
 </head>
 <body>
@@ -233,6 +255,11 @@ html, body {
           <div class="kw-label">Today&rsquo;s word</div>
           <div class="kw-word" id="kw-word"></div>
           <div class="kw-meaning" id="kw-meaning"></div>
+          <div class="kw-example" id="kw-example">
+            <div class="kw-ex-label">Use it</div>
+            <div class="kw-ex-phrase" id="kw-ex-phrase"></div>
+            <div class="kw-ex-meaning" id="kw-ex-meaning"></div>
+          </div>
         </div>
         <div class="kw-revise">
           <h3>Revise</h3>
@@ -287,14 +314,14 @@ html, body {
     </div>
   </section>
 
-  <div id="footer" data-rendered="2026-11-18T16:24:33.714431+05:30">Updated Wed 18 Nov, 4:24 pm</div>
+  <div id="footer" data-rendered="2026-11-18T16:42:11.031889+05:30">Updated Wed 18 Nov, 4:42 pm</div>
   <div id="dots"></div>
   <div id="paused">Paused, tap to resume</div>
 </div>
 
 <script>
 var GITA = [{"ref": "2.14", "text": "The contacts of the senses with the objects, O son of Kunti, which cause heat and cold and pleasure and pain, have a beginning and an end; they are impermanent; endure them bravely, O Arjuna!", "dev": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः । आगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत"}, {"ref": "2.20", "text": "He is not born nor does He ever die; after having been, He again ceases not to be. Unborn, eternal, changeless and ancient, He is not killed when the body is killed.", "dev": "न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः । अजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे"}, {"ref": "2.22", "text": "Just as a man casts off worn-out clothes and puts on new ones, so also the embodied Self casts off worn-out bodies and enters others that are new.", "dev": "वासांसि जीर्णानि यथा विहाय नवानि गृह्णाति नरोऽपराणि । तथा शरीराणि विहाय जीर्णान्यन्यानि संयाति नवानि देही"}, {"ref": "2.38", "text": "Having made pleasure and pain, gain and loss, victory and defeat the same, engage thou in battle for the sake of battle; thus thou shalt not incur sin.", "dev": "सुखदुःखे समे कृत्वा लाभालाभौ जयाजयौ । ततो युद्धाय युज्यस्व नैवं पापमवाप्स्यसि"}, {"ref": "2.47", "text": "Thy right is to work only, but never with its fruits; let not the fruits of actions be thy motive, nor let thy attachment be to inaction.", "dev": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन । मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि"}, {"ref": "2.48", "text": "Perform action, O Arjuna, being steadfast in Yoga, abandoning attachment and balanced in success and failure! Evenness of mind is called Yoga.", "dev": "योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनंजय । सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते"}, {"ref": "2.56", "text": "He whose mind is not shaken by adversity, who does not hanker after pleasures, and who is free from attachment, fear and anger, is called a sage of steady wisdom.", "dev": "दुःखेष्वनुद्विग्नमनाः सुखेषु विगतस्पृहः । वीतरागभयक्रोधः स्थितधीर्मुनिरुच्यते"}, {"ref": "2.62", "text": "When a man thinks of the objects, attachment to them arises; from attachment desire is born; from desire anger arises.", "dev": "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते । सङ्गात्संजायते कामः कामात्क्रोधोऽभिजायते"}, {"ref": "2.63", "text": "From anger comes delusion; from delusion the loss of memory; from loss of memory the destruction of discrimination; from the destruction of discrimination he perishes.", "dev": "क्रोधाद्भवति संमोहः संमोहात्स्मृतिविभ्रमः । स्मृतिभ्रंशाद्बुद्धिनाशो बुद्धिनाशात्प्रणश्यति"}, {"ref": "2.64", "text": "But the self-controlled man, moving amongst objects with the senses under restraint, and free from attraction and repulsion, attains to peace.", "dev": "रागद्वेषवियुक्तैस्तु विषयानिन्द्रियैश्चरन् । आत्मवश्यैर्विधेयात्मा प्रसादमधिगच्छति"}, {"ref": "2.70", "text": "He attains peace into whom all desires enter as waters enter the ocean, which, filled from all sides, remains unmoved; but not the man who is full of desires.", "dev": "आपूर्यमाणमचलप्रतिष्ठं समुद्रमापः प्रविशन्ति यद्वत् । तद्वत्कामा यं प्रविशन्ति सर्वे स शान्तिमाप्नोति न कामकामी"}, {"ref": "3.9", "text": "The world is bound by actions other than those performed for the sake of sacrifice; do thou, therefore, O son of Kunti, perform action for that sake (for sacrifice) alone, free from attachment!", "dev": "यज्ञार्थात्कर्मणोऽन्यत्र लोकोऽयं कर्मबन्धनः । तदर्थं कर्म कौन्तेय मुक्तसङ्गः समाचर"}, {"ref": "3.19", "text": "Therefore, without attachment, do thou always perform action which should be done; for, by performing action without attachment man reaches the Supreme.", "dev": "तस्मादसक्तः सततं कार्यं कर्म समाचर । असक्तो ह्याचरन्कर्म परमाप्नोति पूरुषः"}, {"ref": "3.35", "text": "Better is one’s own duty, though devoid of merit, than the duty of another well discharged. Better is death in one’s own duty; the duty of another is fraught with fear.", "dev": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात् । स्वधर्मे निधनं श्रेयः परधर्मो भयावहः"}, {"ref": "4.7", "text": "Whenever there is a decline of righteousness, O Arjuna, and rise of unrighteousness, then I manifest Myself!", "dev": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत । अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्"}, {"ref": "4.8", "text": "For the protection of the good, for the destruction of the wicked, and for the establishment of righteousness, I am born in every age.", "dev": "परित्राणाय साधूनां विनाशाय च दुष्कृताम् । धर्मसंस्थापनार्थाय सम्भवामि युगे युगे"}, {"ref": "4.38", "text": "Verily there is no purifier in this world like knowledge. He who is perfected in Yoga finds it in the Self in time.", "dev": "न हि ज्ञानेन सदृशं पवित्रमिह विद्यते । तत्स्वयं योगसंसिद्धः कालेनात्मनि विन्दति"}, {"ref": "5.10", "text": "He who performs actions, offering them to Brahman and abandoning attachment, is not tainted by sin as a lotus leaf by water.", "dev": "ब्रह्मण्याधाय कर्माणि सङ्गं त्यक्त्वा करोति यः । लिप्यते न स पापेन पद्मपत्रमिवाम्भसा"}, {"ref": "6.5", "text": "Let a man lift himself by his own Self alone; let him not lower himself, for this self alone is the friend of oneself and this self alone is the enemy of oneself.", "dev": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत् । आत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः"}, {"ref": "6.6", "text": "The self is the friend of the self for him who has conquered himself by the Self, but to the unconquered self, this self stands in the position of an enemy like the (external) foe.", "dev": "बन्धुरात्मात्मनस्तस्य येनात्मैवात्मना जितः । अनात्मनस्तु शत्रुत्वे वर्तेतात्मैव शत्रुवत्"}, {"ref": "6.17", "text": "Yoga becomes the destroyer of pain for him who is always moderate in eating and recreation (such as walking, etc.), who is moderate in exertion in actions, who is moderate in sleep and wakefulness.", "dev": "युक्ताहारविहारस्य युक्तचेष्टस्य कर्मसु । युक्तस्वप्नावबोधस्य योगो भवति दुःखहा"}, {"ref": "6.35", "text": "Undoubtedly, O mighty-armed Arjuna, the mind is difficult to control and restless; but, by practice and by dispassion it may be restrained!", "dev": "असंशयं महाबाहो मनो दुर्निग्रहं चलम् । अभ्यासेन तु कौन्तेय वैराग्येण च गृह्यते"}, {"ref": "9.22", "text": "To those men who worship Me alone, thinking of no other, of those ever united, I secure what is not already possessed and preserve what they already possess.", "dev": "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते । तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्"}, {"ref": "9.26", "text": "Whoever offers Me with devotion and a pure mind (heart), a leaf, a flower, a fruit or a little water—I accept (this offering).", "dev": "पत्रं पुष्पं फलं तोयं यो मे भक्त्या प्रयच्छति । तदहं भक्त्युपहृतमश्नामि प्रयतात्मनः"}, {"ref": "10.20", "text": "I am the Self, O Gudakesha, seated in the hearts of all beings! I am the beginning, the middle and also the end of all beings.", "dev": "अहमात्मा गुडाकेश सर्वभूताशयस्थितः । अहमादिश्च मध्यं च भूतानामन्त एव च"}, {"ref": "12.15", "text": "He by whom the world is not agitated and who cannot be agitated by the world, and who is freed from joy, envy, fear and anxiety—he is dear to Me.", "dev": "यस्मान्नोद्विजते लोको लोकान्नोद्विजते च यः । हर्षामर्षभयोद्वेगैर्मुक्तो यः स च मे प्रियः"}, {"ref": "17.15", "text": "Speech which causes no excitement and is truthful, pleasant and beneficial, the practice of the study of the Vedas, are called austerity of speech.", "dev": "अनुद्वेगकरं वाक्यं सत्यं प्रियहितं च यत् । स्वाध्यायाभ्यसनं चैव वाङ्मयं तप उच्यते"}, {"ref": "18.66", "text": "Abandoning all duties, take refuge in Me alone; I will liberate thee from all sins; grieve not.", "dev": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज । अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः"}, {"ref": "18.78", "text": "Wherever there is Krishna, the Lord of Yoga, wherever there is Arjuna, the archer, there are prosperity, happiness, victory and firm policy; such is my conviction.", "dev": "यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः । तत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम"}, {"ref": "6.34", "text": "The mind verily is restless, turbulent, strong and unyielding, O Krishna! I deem it as difficult to control as to control the wind.", "dev": "चञ्चलं हि मनः कृष्ण प्रमाथि बलवद्‌दृढम् । तस्याहं निग्रहं मन्ये वायोरिव सुदुष्करम्"}];
-var KONKANI = [{"word": "Borem", "meaning": "Alright / OK"}, {"word": "Borem Num", "meaning": "Bad"}, {"word": "Cheddo", "meaning": "Boy"}, {"word": "Cheddum", "meaning": "Girl"}, {"word": "Matxem", "meaning": "Excuse me"}, {"word": "Begin", "meaning": "Fast"}, {"word": "Bail", "meaning": "Woman"}, {"word": "Dadlo", "meaning": "Man"}, {"word": "Hinga", "meaning": "Here"}, {"word": "Kitle", "meaning": "How much"}, {"word": "Hanv", "meaning": "I / Me"}, {"word": "Mojem", "meaning": "My / Mine"}, {"word": "Tum", "meaning": "You"}, {"word": "Odik", "meaning": "More"}, {"word": "Na", "meaning": "No"}, {"word": "Soukas", "meaning": "Slow"}, {"word": "Guneaun bogos", "meaning": "Sorry"}, {"word": "Rau", "meaning": "Stop"}, {"word": "Thinga", "meaning": "There"}, {"word": "Thim", "meaning": "They"}, {"word": "Hem", "meaning": "This"}, {"word": "Ami", "meaning": "We"}, {"word": "Kitem", "meaning": "What"}, {"word": "Kedna", "meaning": "When"}, {"word": "Khuim", "meaning": "Where"}, {"word": "Konn", "meaning": "Who"}, {"word": "Kiteak", "meaning": "Why"}, {"word": "Voi", "meaning": "Yes"}, {"word": "Ek", "meaning": "One"}, {"word": "Don", "meaning": "Two"}, {"word": "Tin", "meaning": "Three"}, {"word": "Dha", "meaning": "Ten"}];
+var KONKANI = [{"word": "Borem", "meaning": "Alright / OK", "example": "Deu borem korum", "example_meaning": "Thank you", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Hinga", "meaning": "Here", "example": "Hinga rau", "example_meaning": "Stop here", "example_source": "goatourism.gov.in/konkani (Goa Tourism)"}, {"word": "Kitle", "meaning": "How much", "example": "Taxi kitley bhaadem ghetaam?", "example_meaning": "How much does a taxi charge?", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Hanv", "meaning": "I / Me", "example": "Hanv soz-mog-nam", "example_meaning": "I don't understand", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Mojem", "meaning": "My / Mine", "example": "Mojem naum ...", "example_meaning": "My name is ...", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Tum", "meaning": "You", "example": "Tum koso asa?", "example_meaning": "How are you?", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Rau", "meaning": "Stop", "example": "Hinga rau", "example_meaning": "Stop here", "example_source": "goatourism.gov.in/konkani (Goa Tourism)"}, {"word": "Hem", "meaning": "This", "example": "Haon hem ghetam", "example_meaning": "I'll take this", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Kitem", "meaning": "What", "example": "Tujhe nahve kittem?", "example_meaning": "What is your name?", "example_source": "goanbeacon.com/konkani-language (Goan Romi phrases)"}, {"word": "Kedna", "meaning": "When", "example": "Toh kednaam porot yet-olo?", "example_meaning": "When will he be back?", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Khuim", "meaning": "Where", "example": "Police station khuim assa?", "example_meaning": "Where is the police station?", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}, {"word": "Ek", "meaning": "One", "example": "Maka ek taxi haadshi?", "example_meaning": "Can you get me a taxi?", "example_source": "lookgoa.com/learn-quick-goa-konkani (Goan Romi phrasebook)"}];
 var N = 7;
 var cur = 0, paused = false, timer = null;
 var preview = null;
@@ -323,18 +350,28 @@ function pickContent() {
   }
   if (KONKANI.length) {
     var n = KONKANI.length;
-    var w = KONKANI[s % n];
-    document.getElementById('kw-word').textContent = w.word;
+    var wi = s % n;
+    var w = KONKANI[wi];
+    var wordEl = document.getElementById('kw-word');
+    wordEl.textContent = w.word;
+    wordEl.style.fontSize = '116px';  // sized by fitWord() once the slide is visible
     document.getElementById('kw-meaning').textContent = w.meaning;
+    var exEl = document.getElementById('kw-example');
+    if (w.example) {
+      document.getElementById('kw-ex-phrase').textContent = w.example;
+      document.getElementById('kw-ex-meaning').textContent = w.example_meaning || '';
+      exEl.style.display = '';
+    } else {
+      exEl.style.display = 'none';
+    }
     var rev = '';
     for (var k = 1; k <= 3; k++) {
-      var p = KONKANI[(((s - k) % n) + n) % n];
       rev += '<div class="kw-rev-row"><div class="w"></div><div class="m"></div></div>';
     }
     document.getElementById('kw-revise').innerHTML = rev;
     var rows = document.getElementById('kw-revise').children;
     for (var k = 1; k <= 3; k++) {
-      var p = KONKANI[(((s - k) % n) + n) % n];
+      var p = KONKANI[(((wi - k) % n) + n) % n];
       rows[k-1].children[0].textContent = p.word;
       rows[k-1].children[1].textContent = p.meaning;
     }
@@ -468,11 +505,22 @@ function drawMoon() {
   document.getElementById('moon-next').textContent = next[0] + ' in ' + nd + (nd === 1 ? ' day' : ' days');
 }
 
+function fitWord() {
+  var wordEl = document.getElementById('kw-word');
+  if (!wordEl || !wordEl.textContent) return;
+  var maxW = wordEl.parentNode.clientWidth - 44;  // card inner width minus padding
+  if (maxW <= 0) return;  // slide hidden: measured on show()
+  var fs = 116;
+  wordEl.style.fontSize = fs + 'px';
+  while (wordEl.scrollWidth > maxW && fs > 56) { fs -= 6; wordEl.style.fontSize = fs + 'px'; }
+}
+
 function show(i) {
   cur = ((i % N) + N) % N;
   var slides = document.querySelectorAll('.slide');
   for (var k = 0; k < slides.length; k++) slides[k].className = slides[k].className.replace(' active', '');
   document.getElementById('s' + cur).className += ' active';
+  fitWord();
   var dots = document.getElementById('dots').children;
   for (var k = 0; k < dots.length; k++) dots[k].className = 'dot' + (k === cur ? ' on' : '');
   Photos.onShow(cur);
