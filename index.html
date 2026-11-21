@@ -368,7 +368,7 @@ html, body {
     </div>
   </section>
 
-  <div id="footer" data-rendered="2026-11-21T07:00:25.558582+05:30">Updated Sat 21 Nov, 7:00 am</div>
+  <div id="footer" data-rendered="2026-11-21T16:06:33.798435+05:30">Updated Sat 21 Nov, 4:06 pm</div>
   <div id="dots"></div>
   <div id="paused">Paused, tap to resume</div>
 </div>
@@ -388,9 +388,19 @@ function slot() {
   var d = new Date();
   return ordinal(d) * 2 + (d.getHours() >= 12 ? 1 : 0);
 }
+/* Konkani word slot: changes at 07:00 and 19:00 IST (Piya, 21 Nov). Pinned to IST,
+   independent of the device timezone. */
+function slotKW() {
+  var n = new Date();
+  var t = new Date(n.getTime() + (n.getTimezoneOffset() + 330) * 60000);
+  var ord = Math.floor(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()) / 86400000);
+  var h = t.getHours();
+  return ord * 2 + (h >= 19 ? 1 : 0) - (h < 7 ? 1 : 0);
+}
 
 function pickContent() {
   var s = slot();
+  var sk = slotKW();
   if (GITA.length) {
     var q = GITA[s % GITA.length];
     var devEl = document.getElementById('gita-dev');
@@ -405,7 +415,7 @@ function pickContent() {
   }
   if (KONKANI.length) {
     var n = KONKANI.length;
-    var wi = s % n;
+    var wi = sk % n;
     var w = KONKANI[wi];
     var wordEl = document.getElementById('kw-word');
     wordEl.textContent = w.word;
@@ -884,11 +894,15 @@ function wcTick() {
     var ageH = (Date.now() - rendered.getTime()) / 36e5;
     var n = nowIST();
     var today = isoDay(n);
-    // Next expected refresh after the render: 7:00 or 17:00 IST daily.
+    // Next expected refresh after the render: 00:00, 06:00, 12:00 or 18:00 IST daily.
     var rIST = new Date(rendered.getTime() + (rendered.getTimezoneOffset() + 330) * 60000);
-    var cand = new Date(rIST); cand.setHours(7, 0, 0, 0);
-    if (cand <= rIST) cand.setHours(17, 0, 0, 0);
-    if (cand <= rIST) cand.setDate(cand.getDate() + 1), cand.setHours(7, 0, 0, 0);
+    var SLOTS = [0, 6, 12, 18];
+    var cand = new Date(rIST), slotFound = false;
+    for (var si = 0; si < SLOTS.length; si++) {
+      cand.setHours(SLOTS[si], 0, 0, 0);
+      if (cand > rIST) { slotFound = true; break; }
+    }
+    if (!slotFound) { cand.setDate(cand.getDate() + 1); cand.setHours(0, 0, 0, 0); }
     var nextRefreshUtcMs = cand.getTime() - (rIST.getTimezoneOffset() + 330) * 60000;
     var overdueH = (Date.now() - nextRefreshUtcMs) / 36e5;
     var days = document.querySelectorAll('[data-day]');
